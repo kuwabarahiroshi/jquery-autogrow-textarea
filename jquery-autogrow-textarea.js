@@ -22,7 +22,7 @@
         var $textarea, $origin, origin, hasOffset, innerHeight, height, offset = 0;
 
         $textarea = $(this).css({overflow: 'hidden', resize: 'none'});
-        $origin = $textarea.clone().attr('value', '').appendTo(doc.body);
+        $origin = $textarea.clone().appendTo(doc.body);
         origin = $origin.get(0);
 
         height = $origin.height();
