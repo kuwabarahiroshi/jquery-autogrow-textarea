@@ -45,6 +45,8 @@
             .on('focus', onTextAreaFocus)
             .on('blur', onTextAreaBlur)
             ;
+            
+        grow($textarea, $origin, origin,  height, offset);
     }
 
     /**
