@@ -19,10 +19,10 @@
      * Actual initialization
      */
     function init() {
-        var $textarea, $origin, origin, hasOffset, innerHeight, height, offset = 0;
+        var $textarea, $origin, origin, ohasOffset, innerHeight, height, offset = 0;
 
         $textarea = $(this).css({overflow: 'hidden', resize: 'none'});
-        $origin = $textarea.clone().appendTo(doc.body);
+        $origin = $textarea.clone().val('').appendTo(doc.body);
         origin = $origin.get(0);
 
         height = $origin.height();
@@ -45,7 +45,8 @@
             .on('focus', onTextAreaFocus)
             .on('blur', onTextAreaBlur)
             ;
-            
+        
+        $origin.val($textarea.val());
         grow($textarea, $origin, origin,  height, offset);
     }
 
