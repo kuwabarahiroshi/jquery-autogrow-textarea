@@ -1,4 +1,6 @@
 ;(function($, doc) {
+    'use strict';
+
     // Plugin interface
     $.fn.autoGrowTextarea = autoGrowTextArea;
     $.fn.autoGrowTextArea = autoGrowTextArea;
@@ -19,7 +21,7 @@
      * Actual initialization
      */
     function init() {
-        var $textarea, $origin, origin, ohasOffset, innerHeight, height, offset = 0;
+        var $textarea, $origin, origin, hasOffset, innerHeight, height, offset = 0;
 
         $textarea = $(this).css({overflow: 'hidden', resize: 'none'});
         $origin = $textarea.clone().val('').appendTo(doc.body);
