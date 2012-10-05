@@ -8,7 +8,6 @@
         },
             plugin = this,
             $textarea = $(textarea),
-            textarea = textarea,
             origin;
         
         plugin.settings = {};
@@ -23,7 +22,7 @@
             plugin.offset = 0;
             
             plugin.reinit();
-        }
+        };
         
         /**
          * Enables the plugin
@@ -35,9 +34,9 @@
             });
             
             // match the clone value with the original and run an initial grow
-            $origin.val($textarea.val());
+            plugin.$origin.val($textarea.val());
             plugin.grow();
-        }
+        };
         
         /**
          * Disables the plugin
@@ -47,7 +46,7 @@
             
             // clear the interval in case it was still running
             clearInterval(plugin.timerId);
-        }
+        };
         
         /**
          *  Reinitialize the plugin
@@ -68,7 +67,7 @@
 
             plugin.height = plugin.$origin.height();
             origin.scrollHeight; // necessary for IE6-8. @see http://bit.ly/LRl3gf
-            plugin.hasOffset = (origin.scrollHeight !== height);
+            plugin.hasOffset = (origin.scrollHeight !== plugin.height);
 
             // `hasOffset` detects whether `.scrollHeight` includes padding.
             // This behavior differs between browsers.
@@ -81,7 +80,7 @@
             
             // we are done reinitializing, let's enable the plugin
             plugin.enable();
-        }
+        };
         
         /**
          * grow textarea height if its value changed
@@ -90,9 +89,9 @@
             var current, scrollHeight, height;
 
             current = $textarea.attr('value');
-            if (current === prev) return;
+            if (current === plugin.prev) return;
 
-            prev = current;
+            plugin.prev = current;
 
             plugin.$origin.attr('value', current).show();
             origin.scrollHeight; // necessary for IE6-8. @see http://bit.ly/LRl3gf
@@ -101,7 +100,7 @@
             plugin.$origin.hide();
 
             $textarea.height(height > plugin.initialHeight ? height : initialHeight);
-        }
+        };
 
         /**
          * on focus
@@ -109,14 +108,14 @@
         var onTextAreaFocus = function() {
             plugin.prev = $textarea.val();
             plugin.timerId = setInterval(plugin.grow, 30);
-        }
+        };
 
         /**
          * on blur
          */
         var onTextAreaBlur = function() {
             clearInterval(plugin.timerId);
-        }
+        };
 
         /**
          * destroy the plugin and remove all traces of it
@@ -126,8 +125,8 @@
             plugin.$origin.remove();
             
             $textarea.removeData('autoGrowTextArea');
-        }
-    }
+        };
+    };
     
     
     // Plugin interface
@@ -149,5 +148,5 @@
                 $(this).data('autoGrowTextArea', plugin);
             }
         });
-    }
+    };
 }(jQuery, document));
