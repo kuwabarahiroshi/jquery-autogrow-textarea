@@ -58,7 +58,7 @@
             $textarea.css({overflow: 'hidden', resize: 'none'});
             
             // check if $origin already exists and remove it if so
-            if(plugin.$origin.length > 0) {
+            if(plugin.$origin) {
                 plugin.$origin.remove();
             }
             
@@ -75,6 +75,8 @@
                 plugin.innerHeight = plugin.$origin.innerHeight();
                 plugin.offset = plugin.innerHeight - plugin.height;
             }
+            
+            plugin.initialHeight = plugin.height;
 
             plugin.$origin.hide();
             
@@ -99,7 +101,7 @@
             height = scrollHeight - plugin.offset;
             plugin.$origin.hide();
 
-            $textarea.height(height > plugin.initialHeight ? height : initialHeight);
+            $textarea.height(height > plugin.initialHeight ? height : plugin.initialHeight);
         };
 
         /**
@@ -126,17 +128,9 @@
             
             $textarea.removeData('autoGrowTextArea');
         };
+        
+        init();
     };
-    
-    
-    // Plugin interface
-    $.fn.autoGrowTextarea = autoGrowTextArea;
-    $.fn.autoGrowTextArea = autoGrowTextArea;
-    
-    // Shorthand alias
-    if (!('autoGrow' in $.fn)) {
-        $.fn.autoGrow = autoGrowTextArea;
-    }
 
     /**
      * Initialization on each element
@@ -149,4 +143,13 @@
             }
         });
     };
+    
+    // Plugin interface
+    $.fn.autoGrowTextarea = autoGrowTextArea;
+    $.fn.autoGrowTextArea = autoGrowTextArea;
+    
+    // Shorthand alias
+    if (!('autoGrow' in $.fn)) {
+        $.fn.autoGrow = autoGrowTextArea;
+    }
 }(jQuery, document));
