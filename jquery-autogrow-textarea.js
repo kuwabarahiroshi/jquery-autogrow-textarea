@@ -17,10 +17,13 @@
          * Enables the plugin
          */
         plugin.enable = function() {
-            $textarea.on({
-                'focus.autoGrowTextArea': onTextAreaFocus,
-                'blur.autoGrowTextArea': onTextAreaBlur
-            });
+            $textarea
+                .on({
+                    'focus.autoGrowTextArea': onTextAreaFocus,
+                    'blur.autoGrowTextArea': onTextAreaBlur
+                })
+                .css({overflow: 'hidden'})
+            ;
             
             // match the clone value with the original and run an initial grow
             plugin.$origin.val($textarea.val());
@@ -31,7 +34,10 @@
          * Disables the plugin
          */
         plugin.disable = function() {
-            $textarea.off('.autoGrowTextArea');
+            $textarea
+                .off('.autoGrowTextArea')
+                .css({overflow: 'visible'})
+            ;
             
             // clear the interval in case it was still running
             clearInterval(plugin.timerId);
@@ -104,6 +110,10 @@
                 // if our current height is bigger, set the height to maxHeight
                 if(plugin.settings.maxHeight < height) {
                     height = plugin.settings.maxHeight;
+                    $textarea.css({overflow: 'visible'});
+                }
+                else {
+                    $textarea.css({overflow: 'hidden'});
                 }
             }
             
@@ -129,6 +139,8 @@
          * destroy the plugin and remove all traces of it
          */
         plugin.destory = function() {
+            // reset the styles
+            $textarea.css({overflow: '', resize: '', 'white-space': ''});
             plugin.disable();
             plugin.$origin.remove();
             
