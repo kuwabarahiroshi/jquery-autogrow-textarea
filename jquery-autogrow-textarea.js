@@ -135,11 +135,25 @@
     /**
      * Initialization on each element
      */
-    var autoGrowTextArea = function(options) {
+    var autoGrowTextArea = function(method, options) {
         return this.each(function() {
             if (undefined == $(this).data('autoGrowTextArea')) {
+                // if we haven't created the plugin yet, the method must be the options
+                options = method;
                 var plugin = new $.autoGrowTextArea(this, options);
                 $(this).data('autoGrowTextArea', plugin);
+            }
+            else if(method != undefined) {
+                var autoGrowTextArea = $(this).data('autoGrowTextArea');
+                if(autoGrowTextArea.hasOwnProperty(method)) {
+                    autoGrowTextArea[method](options);
+                }
+                else {
+                    $.error('autoGrowTextArea has not method: ' + method);
+                }
+            }
+            else {
+                $.error('autoGrowTextArea has already been initialized');
             }
         });
     };
