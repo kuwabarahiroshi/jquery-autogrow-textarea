@@ -46,12 +46,12 @@
         /**
          *  (Re)initialize the plugin
          */
-        plugin.reinit = function() {
+        plugin.reinit = function(reinit_options) {
             // set up some variables
             var hasOffset, height, innerHeight;
             
             // initiate our settings, use defaults where necessary
-            plugin.settings = $.extend({}, defaults, options);
+            plugin.settings = $.extend({}, defaults, reinit_options ? reinit_options : options);
             
             plugin.offset = 0;
             
