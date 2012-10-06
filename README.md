@@ -3,9 +3,36 @@ jquery-autogrow-textarea
 
 A jQuery plugin to make textarea be resized automatically to fit its contents.
 
+**Usage**
+
+```javascript
+$('textarea').autoGrowTextArea();
+// or
+$('textarea').autoGrowTextarea();
+// of, if namespace available
+$('textarea').autoGrow();
+
+// Options
+$('textarea').autoGrowTextArea({
+    minHeight: 50,
+    maxHeight: 150
+});
+
+// Methods, available after plugin has been initialized
+$('textarea).autoGrowTextArea('disable'); // disables autogrowing
+$('textarea).autoGrowTextArea('enable'); // (re)enables autogrowing after disabling
+$('textarea).autoGrowTextArea('grow'); // triggers the resizing of textarea manually, useful if content has been edited via jquery or while textarea is disabled
+$('textarea).autoGrowTextArea('reinit'); // reinitialize plugin, useful if textarea has changed in some way, takes an optional options object as secondary parameter
+$('textarea).autoGrowTextArea('destroy'); // reinstates textarea to state before plugin has been first initialized, removes all data and events
+```
+
 **DEMO**
 
 http://jsfiddle.net/kuwabarahiroshi/7CsFR/
+
+or
+
+index.html
 
 **Why I wrote this plugin**
 
@@ -27,7 +54,9 @@ I, as a Japanese, thought it could be enhanced with using `setInterval()` and `.
 
 **Tested**
 
- * Win XP: IE8
- * Win Vista: IE9, Opera, Firefox
- * Mac OSX: Chrome, Firefox, Safari
- * iOS: mobile safari
+ * Win Vista: IE7
+ * Win 7: IE9, IE8, Chrome(22.0), Firefox(15.0.1), Safari(5.1.7), Opera(12.02)
+ * Mac OSX: Chrome(22.0), Firefox(15.0.1), Safari(6.0.1), Opera(12.02)
+ * iOS: Mobile Safari(iOS 6)
+ * Android: Stock Browser(Android 2.3)
+ * webOS: Stock Browser(webOS 2.2.4)
