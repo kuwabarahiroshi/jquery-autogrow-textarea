@@ -16,7 +16,7 @@ Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</textarea
         <h2>One-line textarea</h2>
         <textarea id="textarea-3" rows="1"></textarea>
         
-        <h2>Textarea with pre-defined initialHeight</h2>
+        <h2>Textarea with Min/Max Height</h2>
         <textarea id="textarea-4"></textarea>
         
         <h2>Disable/Enable/Grow Methods</h2>
@@ -31,7 +31,8 @@ Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</textarea
             $('textarea').filter(':not("#textarea-4")').autoGrowTextArea();
             
             $('#textarea-4').autoGrowTextArea({
-                initialHeight: 50
+                minHeight: 50,
+                maxHeight: 150
             });
             
             $(document).on('click', 'button', function(e) {

@@ -4,7 +4,8 @@
     $.autoGrowTextArea = function(textarea, options) {
         // let's set up plugin wide variables
         var defaults = {
-            initialHeight: false
+            minHeight: false,
+            maxHeight: false
         },
             plugin = this,
             $textarea = $(textarea),
@@ -72,8 +73,8 @@
                 plugin.offset = innerHeight - height;
             }
             
-            // if initialHeight has been provided in the settings use that value, otherwise use our calculated value
-            plugin.initialHeight = plugin.settings.initialHeight ? plugin.settings.initialHeight : height;
+            // if minHeight has been provided in the settings use it as initialHeight, otherwise use our calculated value
+            plugin.initialHeight = plugin.settings.minHeight ? plugin.settings.minHeight : height;
 
             plugin.$origin.hide();
             
@@ -98,6 +99,14 @@
             height = scrollHeight - plugin.offset;
             plugin.$origin.hide();
 
+            // check if a max height was provided
+            if(plugin.settings.maxHeight) {
+                // if our current height is bigger, set the height to maxHeight
+                if(plugin.settings.maxHeight < height) {
+                    height = plugin.settings.maxHeight;
+                }
+            }
+            
             $textarea.height(height > plugin.initialHeight ? height : plugin.initialHeight);
         };
 
