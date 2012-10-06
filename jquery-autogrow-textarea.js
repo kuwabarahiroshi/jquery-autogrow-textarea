@@ -4,25 +4,13 @@
     $.autoGrowTextArea = function(textarea, options) {
         // let's set up plugin wide variables
         var defaults = {
-            
+            initialHeight: false
         },
             plugin = this,
             $textarea = $(textarea),
             origin;
         
         plugin.settings = {};
-
-        /**
-         * Private init function that is called only once, when autoGrowTextarea is called
-         */
-        var init = function() {
-            // initiate our settings, use defaults where necessary
-            plugin.settings = $.extend({}, defaults, options);
-            
-            plugin.offset = 0;
-            
-            plugin.reinit();
-        };
         
         /**
          * Enables the plugin
@@ -49,34 +37,43 @@
         };
         
         /**
-         *  Reinitialize the plugin
+         *  (Re)initialize the plugin
          */
         plugin.reinit = function() {
-            // disable the plugin while reinitializing
-            plugin.disable();
+            // set up some variables
+            var hasOffset, height, innerHeight;
             
-            $textarea.css({overflow: 'hidden', resize: 'none'});
+            // initiate our settings, use defaults where necessary
+            plugin.settings = $.extend({}, defaults, options);
+            
+            plugin.offset = 0;
             
             // check if $origin already exists and remove it if so
             if(plugin.$origin) {
                 plugin.$origin.remove();
+                
+                // disable the plugin while reinitializing
+                plugin.disable();
             }
             
+            $textarea.css({overflow: 'hidden', resize: 'none'});
+
             plugin.$origin = $textarea.clone().val('').appendTo(doc.body);
             origin = plugin.$origin.get(0);
 
-            plugin.height = plugin.$origin.height();
+            height = plugin.$origin.height();
             origin.scrollHeight; // necessary for IE6-8. @see http://bit.ly/LRl3gf
-            plugin.hasOffset = (origin.scrollHeight !== plugin.height);
+            hasOffset = (origin.scrollHeight !== height);
 
             // `hasOffset` detects whether `.scrollHeight` includes padding.
             // This behavior differs between browsers.
-            if (plugin.hasOffset) {
-                plugin.innerHeight = plugin.$origin.innerHeight();
-                plugin.offset = plugin.innerHeight - plugin.height;
+            if (hasOffset) {
+                innerHeight = plugin.$origin.innerHeight();
+                plugin.offset = innerHeight - height;
             }
             
-            plugin.initialHeight = plugin.height;
+            // if initialHeight has been provided in the settings use that value, otherwise use our calculated value
+            plugin.initialHeight = plugin.settings.initialHeight ? plugin.settings.initialHeight : height;
 
             plugin.$origin.hide();
             
@@ -129,7 +126,7 @@
             $textarea.removeData('autoGrowTextArea');
         };
         
-        init();
+        plugin.reinit();
     };
 
     /**
