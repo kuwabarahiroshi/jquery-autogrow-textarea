@@ -28,11 +28,7 @@ $('textarea').autoGrowTextArea('destroy'); // reinstates textarea to state befor
 
 **DEMO**
 
-http://jsfiddle.net/kuwabarahiroshi/7CsFR/
-
-or
-
-index.html
+http://htmlpreview.github.com/?https://github.com/ximi/jquery-autogrow-textarea/blob/master/index.html
 
 **Why I wrote this plugin**
 

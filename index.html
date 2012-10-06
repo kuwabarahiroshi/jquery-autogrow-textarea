@@ -7,30 +7,33 @@
         <h2>Empty textarea</h2>
         <textarea id="textarea-1"></textarea>
         
+        <h2>Textarea with padding</h2>
+        <textarea id="textarea-2" style="padding: 30px;"></textarea>
+        
         <h2>Textarea with existing content</h2>
-        <textarea id="textarea-2">Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        <textarea id="textarea-3">Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
         
 Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
 Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</textarea>
     
         <h2>One-line textarea</h2>
-        <textarea id="textarea-3" rows="1"></textarea>
+        <textarea id="textarea-4" rows="1"></textarea>
         
         <h2>Textarea with Min/Max Height</h2>
-        <textarea id="textarea-4"></textarea>
+        <textarea id="textarea-5"></textarea>
         
         <h2>Disable/Enable/Grow Methods</h2>
         <button id="enable">Enable</button>
         <button id="disable">Disable</button>
         <button id="grow">Grow</button>
         <p id="status">Textarea is enabled</p>
-        <textarea id="textarea-5"></textarea>
+        <textarea id="textarea-6"></textarea>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="jquery-autogrow-textarea.js"></script>
         <script>
             $('textarea').filter(':not("#textarea-4")').autoGrowTextArea();
             
-            $('#textarea-4').autoGrowTextArea({
+            $('#textarea-5').autoGrowTextArea({
                 minHeight: 50,
                 maxHeight: 150
             });
@@ -39,7 +42,7 @@ Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</textarea
                 e.preventDefault();
                 var id = $(this).attr('id');
                 
-                $('#textarea-5').data('autoGrowTextArea')[id]();
+                $('#textarea-6').data('autoGrowTextArea')[id]();
                 
                 if(id != 'grow') {
                     $('#status').text('Textarea is ' + id + 'd');
