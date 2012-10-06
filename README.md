@@ -19,11 +19,11 @@ $('textarea').autoGrowTextArea({
 });
 
 // Methods, available after plugin has been initialized
-$('textarea).autoGrowTextArea('disable'); // disables autogrowing
-$('textarea).autoGrowTextArea('enable'); // (re)enables autogrowing after disabling
-$('textarea).autoGrowTextArea('grow'); // triggers the resizing of textarea manually, useful if content has been edited via jquery or while textarea is disabled
-$('textarea).autoGrowTextArea('reinit'); // reinitialize plugin, useful if textarea has changed in some way, takes an optional options object as secondary parameter
-$('textarea).autoGrowTextArea('destroy'); // reinstates textarea to state before plugin has been first initialized, removes all data and events
+$('textarea').autoGrowTextArea('disable'); // disables autogrowing
+$('textarea').autoGrowTextArea('enable'); // (re)enables autogrowing after disabling
+$('textarea').autoGrowTextArea('grow'); // triggers the resizing of textarea manually, useful if content has been edited via jquery or while textarea is disabled
+$('textarea').autoGrowTextArea('reinit'); // reinitialize plugin, useful if textarea has changed in some way, takes an optional options object as secondary parameter
+$('textarea').autoGrowTextArea('destroy'); // reinstates textarea to state before plugin has been first initialized, removes all data and events
 ```
 
 **DEMO**
