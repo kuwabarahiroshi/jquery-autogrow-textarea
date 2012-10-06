@@ -56,7 +56,7 @@
                 plugin.disable();
             }
             
-            $textarea.css({overflow: 'hidden', resize: 'none'});
+            $textarea.css({overflow: 'hidden', resize: 'none', 'white-space': 'pre'});
 
             plugin.$origin = $textarea.clone().val('').appendTo(doc.body);
             origin = plugin.$origin.get(0);
