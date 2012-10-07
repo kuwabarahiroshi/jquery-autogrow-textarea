@@ -125,7 +125,7 @@
          */
         var onTextAreaFocus = function() {
             plugin.prev = $textarea.val();
-            plugin.timerId = setInterval(plugin.grow, 30);
+            plugin.timerId = setInterval(plugin.grow, 100);
         };
 
         /**
