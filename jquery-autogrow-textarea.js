@@ -24,6 +24,11 @@
         var $textarea, $origin, origin, hasOffset, innerHeight, height, offset = 0;
 
         $textarea = $(this).css({overflow: 'hidden', resize: 'none'});
+
+        if($textarea.data('autogrow-origin')){
+            return;
+        }
+
         $origin = $textarea.clone().val('').appendTo($textarea.parent());
         origin = $origin.get(0);
 
