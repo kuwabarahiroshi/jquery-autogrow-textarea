@@ -24,6 +24,11 @@
         var $textarea, $origin, origin, hasOffset, innerHeight, height, offset = 0;
 
         $textarea = $(this).css({overflow: 'hidden', resize: 'none'});
+
+        if($textarea.data('autogrow-origin')){
+            return;
+        }
+
         $origin = $textarea.clone().val('').appendTo($textarea.parent());
         origin = $origin.get(0);
 
@@ -45,7 +50,6 @@
             .data('autogrow-offset', offset)
             .data('autogrow-initial-height', height)
             .on('focus', onTextAreaFocus)
-            .on('blur', onTextAreaBlur)
             ;
 
         grow($textarea, $origin, origin,  height, offset);
@@ -62,21 +66,16 @@
         origin = $origin.get(0);
         initialHeight = $textarea.data('autogrow-initial-height');
         offset = $textarea.data('autogrow-offset');
-        grow.prev = $textarea.attr('value');
+        grow.prev = $textarea.val();
         doGrow = function() {
             grow($textarea, $origin, origin, initialHeight, offset);
         };
 
-        timerId = setInterval(doGrow, 10);
-        $textarea.data('autoGrowTimerId', timerId);
-    }
-
-    /**
-     * on blur
-     */
-    function onTextAreaBlur() {
-        var timerId = $(this).data('autoGrowTimerId');
-        clearInterval(timerId);
+        $textarea.on("keyup change input paste", doGrow);
+        
+        $textarea.on('blur', function(){
+            $textarea.off("keyup change input paste", doGrow);
+        });
     }
 
     /**
@@ -85,13 +84,13 @@
     function grow($textarea, $origin, origin, initialHeight, offset) {
         var current, prev, scrollHeight, height;
 
-        current = $textarea.attr('value');
+        current = $textarea.val();
         prev = grow.prev;
         if (current === prev) return;
 
         grow.prev = current;
 
-        $origin.attr('value', current).show();
+        $origin.val(current).show();
         origin.scrollHeight; // necessary for IE6-8. @see http://bit.ly/LRl3gf
         scrollHeight = origin.scrollHeight;
         height = scrollHeight - offset;
