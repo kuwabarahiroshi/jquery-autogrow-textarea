@@ -1,4 +1,4 @@
-;(function($, doc) {
+;(function ($) {
     'use strict';
 
     // Plugin interface
@@ -25,7 +25,7 @@
 
         $textarea = $(this).css({overflow: 'hidden', resize: 'none'});
 
-        if($textarea.data('autogrow-origin')){
+        if ($textarea.data('autogrow-origin')) {
             return;
         }
 
@@ -47,35 +47,11 @@
 
         $textarea
             .data('autogrow-origin', $origin)
-            .data('autogrow-offset', offset)
-            .data('autogrow-initial-height', height)
-            .on('focus', onTextAreaFocus)
-            ;
+            .on('keyup change input paste', function () {
+                grow($textarea, $origin, origin, height, offset);
+            });
 
-        grow($textarea, $origin, origin,  height, offset);
-    }
-
-    /**
-     * on focus
-     */
-    function onTextAreaFocus() {
-        var $textarea, $origin, origin, initialHeight, offset, doGrow, timerId;
-
-        $textarea = $(this);
-        $origin = $textarea.data('autogrow-origin');
-        origin = $origin.get(0);
-        initialHeight = $textarea.data('autogrow-initial-height');
-        offset = $textarea.data('autogrow-offset');
-        grow.prev = $textarea.val();
-        doGrow = function() {
-            grow($textarea, $origin, origin, initialHeight, offset);
-        };
-
-        $textarea.on("keyup change input paste", doGrow);
-        
-        $textarea.on('blur', function(){
-            $textarea.off("keyup change input paste", doGrow);
-        });
+        grow($textarea, $origin, origin, height, offset);
     }
 
     /**
@@ -98,4 +74,4 @@
 
         $textarea.height(height > initialHeight ? height : initialHeight);
     }
-}(jQuery, document));
+}(jQuery));
