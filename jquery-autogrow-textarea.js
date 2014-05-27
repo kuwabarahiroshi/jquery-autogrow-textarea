@@ -47,7 +47,7 @@
 
         $textarea
             .data('autogrow-origin', $origin)
-            .on('keyup change input paste', function () {
+            .on('keyup change input paste autogrow', function () {
                 grow($textarea, $origin, origin, height, offset);
             });
 
